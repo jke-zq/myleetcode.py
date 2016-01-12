@@ -1,3 +1,4 @@
+
 #Binary Indexed Tree, BIT
 class Solution(object):
     def countRangeSum(self, nums, lower, upper):
