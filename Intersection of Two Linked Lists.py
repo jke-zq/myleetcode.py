@@ -30,4 +30,31 @@ class Solution(object):
         return newn1
         ##solution b
         ##loop headA, then loop headB, the same distance.
+        # Definition for singly-linked list.
+
+#solution B
+class Solution(object):
+    def getIntersectionNode(self, headA, headB):
+        """
+        :type head1, head1: ListNode
+        :rtype: ListNode
+        """
+        ##solution b
+        ##loop headA, then loop headB, the same distance.
+        p1, p2 = headA, headB
+        taila, tailb = False, False
+        while p1 and p2:
+            if p1 == p2:
+                return p1
+            if not p1.next and not taila:
+                p1 = headB
+                taila = True
+            else:
+                p1 = p1.next
+            if not p2.next and not tailb:
+                p2 = headA
+                tailb = True
+            else:
+                p2 = p2.next
+        return None
         
