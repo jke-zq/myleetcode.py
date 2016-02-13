@@ -18,8 +18,9 @@ class Solution(object):
                 tmp.append(node.val)
                 if not node.left and not node.right:
                     ret.append("->".join([str(k) for k in tmp]))
-                doFind(node.left, tmp, ret)
-                doFind(node.right, tmp, ret)
+                else:
+                    doFind(node.left, tmp, ret)
+                    doFind(node.right, tmp, ret)
                 tmp.pop()
         ret = []
         tmp = []
