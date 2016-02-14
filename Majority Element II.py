@@ -4,11 +4,12 @@ class Solution(object):
         :type nums: List[int]
         :rtype: List[int]
         """
-        k = 2
+        k = 3
         dicts = collections.defaultdict(int)
         for n in nums:
             dicts[n] += 1
-            while len(dicts) > k:
+            # while len(dicts) == k:
+            if len(dicts) == k:
                 for x in dicts.keys():
                     dicts[x] -= 1
                     if dicts[x] == 0:

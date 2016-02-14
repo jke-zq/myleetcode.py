@@ -4,13 +4,19 @@ class NumMatrix(object):
         initialize your data structure here.
         :type matrix: List[List[int]]
         """
-        self.snums = []
-        for r in matrix:
-            rows = [0]
-            for c in r:
-                rows.append(rows[-1] + c)
-            self.snums.append(rows)
-                
+        if not matrix:
+            self.sumMatrix = []
+            return
+        
+        rows = len(matrix) + 1
+        cols = len(matrix[0]) + 1
+        self.sumMatrix = [[0 for __ in range(cols)] for __ in range(rows)]
+        for r in range(1, rows):
+            for c in range(1, cols):
+                self.sumMatrix[r][c] = self.sumMatrix[r - 1][c] + matrix[r - 1][c - 1]
+        for r in range(1, rows):    
+            for c in range(1, cols):
+                self.sumMatrix[r][c] += self.sumMatrix[r][c - 1]
 
     def sumRegion(self, row1, col1, row2, col2):
         """
@@ -21,10 +27,11 @@ class NumMatrix(object):
         :type col2: int
         :rtype: int
         """
-        ret = 0
-        for r in range(row1, row2 + 1):
-            ret += self.snums[r][col2 + 1] - self.snums[r][col1]
-        return ret
+        if not self.sumMatrix:
+            return 0
+        return (self.sumMatrix[row2 + 1][col2 + 1] + self.sumMatrix[row1][col1]
+                  - self.sumMatrix[row2 + 1][col1] - self.sumMatrix[row1][col2 + 1])
+        
 
 
 # Your NumMatrix object will be instantiated and called as such:
