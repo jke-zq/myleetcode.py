@@ -34,3 +34,4 @@ class Solution(object):
             v1, opr, v2 = stack.pop(), stack.pop(), stack.pop()
             stack.append(int(OPRS[opr](v1 * 1.0, v2)))
         return stack[0]
+##using recursive
