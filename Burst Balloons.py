@@ -76,3 +76,25 @@ class Solution(object):
                 for x in range(i + 1, j):
                     dp[i][j] = max(dp[i][j], dp[i][x] + dp[x][j] + nums[i] * nums[x] * nums[j])
         return dp[0][n - 1]
+
+##my way
+        if not nums:
+            return 0
+        n = len(nums)
+        nums.insert(0, 1)
+        nums.append(1)
+        dp = [[0 for __ in range(n)] for __ in range(n)]
+        for k in range(0, n):
+            for i in range(0, n - k):
+                j = i + k
+                for x in range(i, j + 1):
+                    # left = dp[i][x - 1] if x >= 1 else 0
+                    # right = dp[x + 1][j] if x <= n - 2 else 0
+                    left = dp[i][x - 1] if x > i else 0
+                    right = dp[x + 1][j] if x < j else 0                    
+                    dp[i][j] = max(dp[i][j], right + left + nums[i] * nums[x + 1] * nums[j + 2])
+        return dp[0][n - 1]
+##公式：
+##d[i][j] = max(d[i][j], d[i][k - 1] + d[k + 1][j] + nums[i - 1] * nums[k] * nums[j + 1]), 其中k = [i, j]
+##notice:if k == i, then d[i][k - 1] == 0; and if k == j, then d[k + 1]d[j] == 0. Why? Because they are out of the array.
+##notiec: when getting the length of list, remember to check if the list is None!
