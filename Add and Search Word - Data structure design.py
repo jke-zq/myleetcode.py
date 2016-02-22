@@ -30,25 +30,21 @@ class WordDictionary(object):
         :type word: str
         :rtype: bool
         """
-        cur = self.root
-        for i in range(len(word)):
-            c = word[i]
-            if c == '.':
-                oldroot = self.root
-                for node in cur.nodes.values():
-                    self.root = node
-                    if self.search(word[i + 1:]):
-                        self.root = oldroot
-                        return True
-                self.root = oldroot
-                return False
-            elif c in cur.nodes:
-                cur = cur.nodes[c]
-            elif '.' in cur.nodes:
-                cur = cur.nodes['.']
+        def searchRec(word, pos, node):
+            if pos == len(word):
+                return node.isstring
             else:
-                return False
-        return cur.isstring
+                if word[pos] in node.nodes:
+                    return searchRec(word, pos + 1, node.nodes[word[pos]])
+                elif word[pos] == '.':
+                    for n in node.nodes.values():
+                        if searchRec(word, pos + 1, n):
+                            return True
+                    return False
+                else:
+                    return False
+        cur = self.root
+        return searchRec(word, 0, cur)
 
 # Your WordDictionary object will be instantiated and called as such:
 # wordDictionary = WordDictionary()

@@ -31,14 +31,15 @@ class Trie(object):
         :type word: str
         :rtype: bool
         """
-        p = self.root
-        for c in word:
-            if c in p.nodes:
-                p = p.nodes[c]
-            else:
-                return False
-        return p.isstring
-
+        # p = self.root
+        # for c in word:
+        #     if c in p.nodes:
+        #         p = p.nodes[c]
+        #     else:
+        #         return False
+        # return p.isstring
+        node = self.findNode(word)
+        return bool(node and node.isstring)
     def startsWith(self, prefix):
         """
         Returns if there is any word in the trie
@@ -46,14 +47,22 @@ class Trie(object):
         :type prefix: str
         :rtype: bool
         """
+        # p = self.root
+        # for c in prefix:
+        #     if c in p.nodes:
+        #         p = p.nodes[c]
+        #     else:
+        #         return False
+        # return True
+        return self.findNode(prefix) is not None
+    def findNode(self, word):
         p = self.root
-        for c in prefix:
+        for c in word:
             if c in p.nodes:
                 p = p.nodes[c]
             else:
-                return False
-        return True
-
+                return None
+        return p
 # Your Trie object will be instantiated and called as such:
 # trie = Trie()
 # trie.insert("somestring")
