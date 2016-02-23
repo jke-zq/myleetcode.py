@@ -16,3 +16,5 @@ class Solution(object):
         if not ret:
             ret = [int(input)]
         return ret
+
+##using dp

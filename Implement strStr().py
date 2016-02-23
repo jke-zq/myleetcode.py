@@ -5,17 +5,14 @@ class Solution(object):
         :type needle: str
         :rtype: int
         """
-        if len(haystack) < len(needle):
+        if haystack is None or needle is None:
             return -1
-        if haystack == needle or needle == "":
-            return 0
         hlen, nlen = len(haystack), len(needle)
         for i in range(hlen - nlen + 1):
             j = 0
-            ret = i
-            while ret < hlen and j < nlen:
-                if haystack[ret] == needle[j]:
-                    ret, j = ret + 1, j + 1
+            while j < nlen:
+                if haystack[i + j] == needle[j]:
+                    j += 1
                 else:
                     break
             if j == nlen:

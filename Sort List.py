@@ -27,13 +27,14 @@ class Solution(object):
             return None
         if head and not head.next:
             return head
-        dummy = ListNode(0)
-        dummy.next = head
-        slow, fast = dummy, dummy
-        while fast and fast.next:
+        # dummy = ListNode(0)
+        # dummy.next = head
+        slow, fast = head, head
+        while fast.next and fast.next.next:
             slow, fast = slow.next, fast.next.next
-        dummy.next = None
+        # dummy.next = None
         head2, slow.next = slow.next, None
         h1 = self.sortList(head)
         h2 = self.sortList(head2)
         return merge(h1, h2)
+##关键点在于两个Node要拆成1个的
