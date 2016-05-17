@@ -21,7 +21,7 @@ class Solution(object):
         #     return self.findKthLargest(right, k - (len(nums) - len(right)))
         # return pivot
         
-        #second solution
+        #second solution -- good style
         def partition(left, right, pivot):
             nums[right], nums[pivot] = nums[pivot], nums[right]
             newpivot = left
