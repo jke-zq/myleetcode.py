@@ -57,4 +57,42 @@ class Solution(object):
             else:
                 p2 = p2.next
         return None
+
+#solution c:
+# Definition for singly-linked list.
+# class ListNode(object):
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+class Solution(object):
+    def getIntersectionNode(self, headA, headB):
+        """
+        :type head1, head1: ListNode
+        :rtype: ListNode
+        """
+        if headA is None or headB is None:
+            return None
+        
+        endA, endB = False, False
+        pA, pB = headA, headB
+        while pA and pB:
+            if pA == pB:
+                return pA
+            if pA.next:
+                pA = pA.next
+            elif not endA:
+                pA = headB
+                endA = True
+            else:
+                return None
+                
+            if pB.next:
+                pB = pB.next
+            elif not endB:
+                pB = headA
+                endB = True
+            else:
+                return None
+        return None
         
