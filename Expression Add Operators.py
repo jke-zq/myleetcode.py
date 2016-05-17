@@ -58,3 +58,55 @@ class Solution(object):
         # print exps
         rets = filter(lambda x: calculate(x) == target, exps)
         return map(lambda x:"".join([str(k) for k in x]), rets)
+## solution two
+class Solution(object):
+    def addOperators(self, num, target):
+        """
+        :type num: str
+        :type target: int
+        :rtype: List[str]
+        """
+        def dfs(start, length, result, preval, expres, ans, num, target):
+            if start == length:
+                if result + preval == target:
+                    ans.append(''.join(expres))
+                    return
+            val = 0
+            i = start
+            while i < length:
+                val = val * 10 + ord(num[i]) - ord('0')
+                
+                expres.append('+')
+                expres.append(num[start:i + 1])
+                dfs(i + 1, length, result + preval, val, expres, ans, num, target)
+                
+                expres[-2] = '-'
+                dfs(i + 1, length, result + preval, -1 * val, expres, ans, num, target)
+                
+                expres[-2] = '*'
+                dfs(i + 1, length, result, preval * val, expres, ans, num, target)
+                
+                expres.pop()
+                expres.pop()
+                if num[start] == '0':
+                    break
+                i += 1
+                    
+                    
+        if not num:
+            return []
+        ans = []
+        expres = []
+        length = len(num)
+        i = 0
+        val = 0
+        while i < length:
+            val = val * 10 + ord(num[i]) - ord('0')
+            expres.append(num[:i + 1])
+            dfs(i + 1, length, 0, val, expres, ans, num, target)
+            expres.pop()
+            
+            if num[0] == '0':
+                break
+            i += 1
+        return ans
