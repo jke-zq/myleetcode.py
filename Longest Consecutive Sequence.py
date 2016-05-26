@@ -4,24 +4,27 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
-        if not nums:
-            return 0
-        sets = set(nums)
-        ans = 1
+        
+        setv = set(nums)
+        
+        ans = 0
         for n in nums:
-            if n not in nums:
-                continue
-            count = 0
-            right = n
-            while right in sets:
-                count += 1
-                sets.remove(right)
-                right += 1
-            left = n - 1
-            while left in sets:
-                count += 1
-                sets.remove(left)
-                left -= 1
-            ans = max(count, ans)
+            if n in setv:
+                count = 1
+                setv.remove(n)
+                left = n - 1
+                while left in setv:
+                    count += 1
+                    setv.remove(left)
+                    left -= 1
+                    
+                right = n + 1
+                while right in setv:
+                    count += 1
+                    setv.remove(right)
+                    right += 1
+                    
+                ans = max(ans, count)
         return ans
                 
+        
