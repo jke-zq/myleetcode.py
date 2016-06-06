@@ -11,7 +11,17 @@ class Solution(object):
             # one = (one & ~x) | (x & ~one & ~two)
             # two = (two & ~x) | (x & tmp) 
         return one
-
+        
+        # solution two
+        # bits = [0] * 32
+        # for a in A:
+        #     for i in range(32):
+        #         bits[i] += a & 1
+        #         a >>= 1
+        # ans = 0
+        # for i in range(32):
+        #     ans += (bits[i] % 3) << i
+        # return ans
 
 class Solution2:
     # @param A, a list of integer
