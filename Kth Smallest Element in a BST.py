@@ -23,7 +23,25 @@ class Solution(object):
                 return cur.val
             k -= 1
             cur = cur.right
-        
-#########################################           
+
+#########################################
 #### need to be done:
-#### to simplify the codes.  
+#### to simplify the codes.
+class Solution(object):
+    def kthSmallest(self, root, k):
+        """
+        :type root: TreeNode
+        :type k: int
+        :rtype: int
+        """
+        stack = []
+        cur = root
+        while k > 1:
+            if cur:
+                stack.append(cur)
+                cur = cur.left
+            else:
+                cur = stack.pop()
+                k -= 1
+                cur = cur.right
+        return cur.val
