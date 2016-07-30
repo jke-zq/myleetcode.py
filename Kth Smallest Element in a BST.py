@@ -36,12 +36,13 @@ class Solution(object):
         """
         stack = []
         cur = root
-        while k > 1:
+        while k:
             if cur:
                 stack.append(cur)
                 cur = cur.left
             else:
                 cur = stack.pop()
+                if k == 1:
+                    return cur.val
                 k -= 1
                 cur = cur.right
-        return cur.val
