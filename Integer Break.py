@@ -14,3 +14,21 @@ class Solution(object):
             return ans
         dp = [0] * (n + 1)
         return helper(n, False)
+
+
+# Hint, find the regularity.
+class Solution(object):
+    def integerBreak(self, n):
+        """
+        :type n: int
+        :rtype: int
+        """
+        def helper(x):
+            if x in (2, 3, 4):
+                return x
+            return helper(3) * helper(x - 3)
+        if n == 2:
+            return 1
+        if n == 3:
+            return 2
+        return helper(n)
