@@ -16,8 +16,8 @@ class Solution(object):
                 end = mid
 
         if nums[start] >= target:
-            return start
+            return 0
         elif nums[end] < target:
-            return end + 1
+            return len(nums)
         else:
             return start + 1
